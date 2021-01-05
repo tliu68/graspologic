@@ -77,7 +77,7 @@ or random initialization), then fits a Gaussian mixture model using
 Expectation-Maximization. The algorithm sweeps through combinations of clustering 
 options such as Gaussian covariance constraints and number of clusters. 
 Each combination is evaluated with the Bayesian Information Criterion, 
-defined as $2ln(\hat{L}) - p ln(n)$ where L is the maximized data likelihood, 
+defined as $2\ln(\hat{L}) - p \ln(n)$ where L is the maximized data likelihood, 
 $p$ is the number of parameters, and $n$ is the number of data points [@bic].
 
 The data likelihood in Expectation-Maximization of Gaussian mixture models 
@@ -105,7 +105,7 @@ For either dataset, the algorithms search over all of
 their clustering options, and across all cluster numbers between 1 and 20. 
 To compare clusterings, we calculate Adjusted Rand Index (ARI). The Rand Index is the
 fraction of times that two clusterings agree whether a pair of points
-are in the same cluster or different clusters. Adjusted Rand Index (ARI)
+are in the same cluster or different clusters. ARI
 corrects for chance and takes values in the interval $[-1,1]$. If the
 clusterings are identical, ARI is one, and if one of the clusterings is
 random, then the expected value of ARI is zero.
@@ -154,18 +154,17 @@ multiple subgroups (\autoref{fig:drosophila_cluster}). The authors of
 @drosophila, who used `mclust`, also note this result.
 
 ![Clustering results of different algorithms on the breast cancer
-dataset ([Wisconsin Breast Cancer Diagnostic Dataset][]). The original data was partitioned into two clusters (benign and malignant), but all algorithms here further
+dataset. The original data was partitioned into two clusters (benign and malignant), but all algorithms here further
 subdivided the data into three or four clusters.\label{fig:bc_cluster}](images/combined_bc_square.png){width="\textwidth"}
 
-![Clustering results of different algorithms on the drosophila dataset
-([Spectral Embedding of Larval *Drosophila* Mushroom Body Connectome][]). 
+![Clustering results of different algorithms on the drosophila dataset. 
 There is considerable variation in the different algorithms’ results. One similarity, however, is that all
 algorithms subdivided the Kenyon cell cluster (red points in **(a)**)
 into several clusters.\label{fig:drosophila_cluster}](images/combined_drosophila_square.png){width="\textwidth"}
 
 
 ### HGMM
-To further illustrate the performance of `HGMM`, we studied its
+To illustrate the performance of `HGMM`, we studied its
 application to the *Drosophila* dataset which was assumed to possess a
 natural hierarchical structure of neuron types. For both hemispheres of
 the connectome, we implemented `HGMM` with a maximum of six components
@@ -179,3 +178,24 @@ neuron types on both hemispheres (\autoref{fig:double_dendrograms}).
 This suggests that `HGMM` could be useful for revealing neuron types and
 subtypes on finer scales, paving way towards a better understanding of
 how various scales of structural domains relate to activities.
+
+![Hierarhical clustering result of `HGMM` on the *Drosophila* dataset.
+At each depth, the maximum number of components was set to 6. Each bar
+in either dendrogram represents a cluster with a width proportional to
+the number of neurons in that cluster. Neurons in each bar was colored
+according to its true label. Unlike projection neurons (PN), input
+neurons (MBIN) or output neurons (MBON), Kenyon cells (KC) were colored
+based on three subclasses, young (KC(y)), multi-claw (KC(m)), and
+single-claw (KC(s)). Clusters at depth one mostly contain neurons from
+the same major class while most leaf clusters contain neurons from the
+samesubclass.\label{fig:double_dendrograms}](images/maggot_dendrograms.png){width="\textwidth"}
+
+Acknowledgement {#acknowledgement .unnumbered}
+===============
+
+Research was partially supported by funding from Microsoft Research.
+
+
+References
+==========
+<div id="refs"></div>
